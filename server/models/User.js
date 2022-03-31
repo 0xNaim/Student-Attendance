@@ -25,6 +25,11 @@ const userSchema = new Schema(
     },
     roles: {
       type: [String],
+      required: true,
+      default: ['STUDENT'],
+    },
+    accountStatus: {
+      type: String,
       enum: ['PENDING', 'ACTIVE', 'REJECTED'],
       default: 'PENDING',
       required: true,
