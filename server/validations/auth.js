@@ -33,11 +33,17 @@ const registerSchemaValidator = Joi.object({
       'string.pattern.base':
         'Password contain at least 1 lowercase, 1 uppercase, 1 numeric and 1 special character',
     }),
-  roles: Joi.string().valid('STUDENT', 'TEACHER').required().messages({
-    'any.only': 'Role must be one of ["STUDENT", "TEACHER"] string value',
-    'string.empty': 'Role is required',
-    'string.base': 'Role is required',
-  }),
+  roles: Joi.array()
+    .items(Joi.string().valid('ADMIN', 'STUDENT', 'TEACHER'))
+    .required()
+    .messages({
+      'array.base': 'Roles must be an Array',
+      'any.only':
+        'Roles must be array of string like ["ADMIN", "STUDENT", "TEACHER"]',
+      'any.required': 'Roles is required',
+      'string.base': 'Roles is required',
+      'string.base': 'Roles is required',
+    }),
   accountStatus: Joi.string()
     .valid('PENDING', 'ACTIVE', 'REJECTED')
     .required()

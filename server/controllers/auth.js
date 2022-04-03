@@ -9,12 +9,18 @@ const errorMsgFormatter = require('../validations/errorFormatter');
 
 const registerController = async (req, res, next) => {
   try {
-    const { name, email, password, roles } =
+    const { name, email, password, roles, accountStatus } =
       await registerSchemaValidator.validateAsync(req.body, {
         abortEarly: false,
       });
 
-    const user = await registerService({ name, email, password, roles });
+    const user = await registerService({
+      name,
+      email,
+      password,
+      roles,
+      accountStatus,
+    });
 
     return res.status(201).json({ message: 'User Created Successfully', user });
   } catch (err) {
