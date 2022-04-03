@@ -50,6 +50,27 @@ const registerSchemaValidator = Joi.object({
     }),
 });
 
+// Login schema
+const loginSchemaValidator = Joi.object({
+  email: Joi.string()
+    .trim()
+    .email({ minDomainSegments: 2 })
+    .normalize()
+    .required()
+    .messages({
+      'any.required': 'Email is required',
+      'string.empty': 'Email is required',
+      'string.base': 'Email must be a string',
+      'string.email': 'Please provide a valid email',
+    }),
+  password: Joi.string().required().messages({
+    'string.empty': 'Password is required',
+    'any.required': 'Password is required',
+    'string.base': 'Password must be string',
+  }),
+});
+
 module.exports = {
   registerSchemaValidator,
+  loginSchemaValidator,
 };
