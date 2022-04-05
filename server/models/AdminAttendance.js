@@ -2,9 +2,19 @@ const { Schema, model } = require('mongoose');
 
 const adminAttendanceSchema = new Schema(
   {
-    timeLimit: Number,
-    status: String,
-    createdAt: Date,
+    timeLimit: {
+      type: Number,
+      required: true,
+      min: 5,
+      max: 30,
+      default: 5,
+    },
+    status: {
+      type: String,
+      required: true,
+      enum: ['RUNNING', 'COMPLETED'],
+      default: 'RUNNING',
+    },
   },
   { timestamps: true }
 );
