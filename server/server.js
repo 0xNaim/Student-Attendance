@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
+const morgan = require('morgan');
 const connectDB = require('./database/database');
+const userMorgan = require('./morgan/useMorgan');
 const routes = require('./routes');
 
 // App
@@ -8,6 +10,9 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+
+// Morgan logger
+userMorgan(app);
 
 // Routes
 app.use(routes);
